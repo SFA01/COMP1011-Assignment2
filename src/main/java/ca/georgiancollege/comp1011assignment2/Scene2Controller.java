@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
+
 public class Scene2Controller {
 
     @FXML
@@ -33,6 +35,15 @@ public class Scene2Controller {
     void OnClickedButton2(ActionEvent event) {
 
     }
+
+    @FXML
+    void OnViewCanvasClicked(ActionEvent event) throws IOException
+    {
+        SceneManager.Instance().changeScene(event,"Scene2.fxml");
+
+        SceneManager.Instance().changeScene(event,"Scene1.fxml");
+    }
+
 
 }
 
