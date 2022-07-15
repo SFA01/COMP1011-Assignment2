@@ -5,45 +5,56 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.fxml.Initializable;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Scene2Controller {
-
-    @FXML
-    private TableColumn<?, ?> Code;
-
-    @FXML
-    private TableColumn<?, ?> Continent;
+public class Scene2Controller implements Initializable{
 
     @FXML
-    private TableColumn<?, ?> Name;
+    private TableColumn<?, ?> CodeColumn;
 
     @FXML
-    private Button OnClickedButton2;
+    private TableColumn<?, ?> ContinentColumn;
 
     @FXML
-    private TableColumn<?, ?> Population;
+    private TableColumn<?, ?> NameColumn;
 
     @FXML
-    private TableColumn<?, ?> Region;
+    private Button Button2;
 
     @FXML
-    private TableView<?> Table;
+    private TableColumn<?, ?> PopulationColumn;
 
     @FXML
-    void OnClickedButton2(ActionEvent event) {
-
-    }
+    private TableColumn<?, ?> RegionColumn;
 
     @FXML
-    void OnViewCanvasClicked(ActionEvent event) throws IOException
-    {
-        SceneManager.Instance().changeScene(event,"Scene2.fxml");
+    private TableView<CountryData> Table;
+
+    @FXML
+    void OnClickedButton2(ActionEvent event) throws IOException {
+
+        //Here I am doing to change the scenes
 
         SceneManager.Instance().changeScene(event,"Scene1.fxml");
+
     }
 
+    //Here I am doing it to populate the table with data
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        CodeColumn.setCellValueFactory(new PropertyValueFactory<>("Code"));
+        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ContinentColumn.setCellValueFactory(new PropertyValueFactory<>("continent"));
+        RegionColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        PopulationColumn.setCellValueFactory(new PropertyValueFactory<>("population"));
+        Table.getItems().addAll(DBManager.Instance().readTable());
+
+    }
 }
 
